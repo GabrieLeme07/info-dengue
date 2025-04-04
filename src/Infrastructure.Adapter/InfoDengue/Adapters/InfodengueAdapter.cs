@@ -10,7 +10,7 @@ public class InfodengueAdapter(IConfiguration configuration, HttpClient httpClie
 {
     private readonly string _baseURL = configuration["Infodengue-BaseURL"];
 
-    public async Task<InfodengueResponseItemDto> GetReportAsync(InfodengueRequestDto parameters)
+    public async Task<List<InfodengueResponseItemDto>> GetReportAsync(InfodengueRequestDto parameters)
     {
         var url = $"{_baseURL}/alertcity";
 
@@ -34,7 +34,7 @@ public class InfodengueAdapter(IConfiguration configuration, HttpClient httpClie
         {
             var json = await response.Response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var result = JsonSerializer.Deserialize<InfodengueResponseItemDto>(json, options);
+            var result = JsonSerializer.Deserialize<List<InfodengueResponseItemDto>>(json, options);
             return result;
         }
         else

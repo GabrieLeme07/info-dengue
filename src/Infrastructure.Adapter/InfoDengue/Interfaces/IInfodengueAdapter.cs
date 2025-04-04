@@ -4,5 +4,5 @@ namespace Infrastructure.Adapter.InfoDengue.Interfaces;
 
 public interface IInfodengueAdapter
 {
-    Task<InfodengueResponseItemDto> GetReportAsync(InfodengueRequestDto parameters);
+    Task<List<InfodengueResponseItemDto>> GetReportAsync(InfodengueRequestDto parameters);
 }
