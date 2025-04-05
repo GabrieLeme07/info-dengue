@@ -8,10 +8,6 @@ A arquitetura do projeto segue os princípios do **Domain-Driven Design (DDD)**,
 - **Infrastructure:** Responsável pelo acesso a dados, implementação dos repositórios e integração com serviços externos (por exemplo, o adapter para a API do Infodengue).
 - **Application/Presentation:** Expõe a API via controllers e orquestra a lógica de negócio por meio dos serviços.
 
-> **Exemplo de DDD:**  
-> A entidade `Report` está definida no domínio, com propriedades como `RequestDate`, `Arbovirus`, `ReportedCases`, etc.  
-> Essa entidade é manipulada pelos repositórios (definidos na camada de infraestrutura) e pelos serviços de aplicação, garantindo que as regras de negócio fiquem centralizadas no domínio e que a camada de apresentação permaneça desacoplada das implementações de persistência e integração externa.
-
 ---
 
 ## Tecnologias e Padrões Utilizados
@@ -72,11 +68,6 @@ Retorna os detalhes do relatório criado (ID, data da solicitação, dados epide
 
 #### GET /api/reports/filter?ibgeCode=3304557&startWeek=10&endWeek=15&arbovirus=Dengue
 **Descrição:** Lista os dados epidemiológicos dos municípios filtrados pelo código IBGE, semana de início, semana fim e arbovirose.
-
-### Solicitantes (Users)
-
-#### GET /api/users
-**Descrição:** Lista todos os solicitantes cadastrados (usuários que realizaram solicitações de relatórios).
 
 ---
 
