@@ -2,16 +2,6 @@
 
 namespace Infrastructure.Adapter.InfoDengue.DTOs;
 
-public class InfodengueResponseDto
-{
-    public string Arbovirus { get; init; }
-    public int StartWeek { get; init; }
-    public int EndWeek { get; init; }
-    public string IBGECode { get; init; }
-    public string City { get; init; }
-    public int TotalCases { get; init; }
-}
-
 public class InfodengueResponseItemDto
 {
     [JsonPropertyName("data_iniSE")]

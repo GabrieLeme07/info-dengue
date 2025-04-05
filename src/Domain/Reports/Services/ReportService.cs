@@ -23,21 +23,40 @@ public class ReportService(
 
         var infodengueData = await _infodengueAdapter.GetReportAsync(reportRequest);
 
-        var report = reportRequest.MapToEntity(user.Id);
+        var report = reportRequest.MapToEntity(user.Id, infodengueData.Sum(e => e.Casos));
 
         await _reportRepository.AddAsync(report);
 
-        var reportDto = new ReportDto
-        {
-            Id = report.Id,
-            RequestDate = report.RequestDate,
-            Arbovirus = report.Arbovirus,
-            StartWeek = report.StartWeek,
-            EndWeek = report.EndWeek,
-            IBGECode = report.IBGECode,
-            City = report.City
-        };
+        return report.MapToDTO();
+    }
 
-        return reportDto;
+    public async Task<IEnumerable<ReportDto>> GetAllReportsAsync()
+    {
+        var reports = await _reportRepository.GetAllAsync();
+        return reports.Select(r => r.MapToDTO());
+    }
+
+    public async Task<IEnumerable<ReportDto>> GetReportsByCitiesAsync(List<string> cities)
+    {
+        var reports = await _reportRepository.GetReportsByCitiesAsync(cities);
+        return reports.Select(r => r.MapToDTO());
+    }
+
+    public async Task<IEnumerable<ReportDto>> GetReportsByIBGECodeAsync(string ibgeCode)
+    {
+        var reports = await _reportRepository.GetReportsByIBGECodeAsync(ibgeCode);
+        return reports.Select(r => r.MapToDTO());
+    }
+
+    public async Task<int> GetTotalReportedCasesByCitiesAsync(List<string> cities)
+        => await _reportRepository.GetTotalReportedCasesByCitiesAsync(cities);
+
+    public async Task<int> GetTotalReportedCasesByArbovirusAsync(string arbovirus)
+        => await _reportRepository.GetTotalReportedCasesByArbovirusAsync(arbovirus);
+
+    public async Task<IEnumerable<ReportDto>> GetReportsByFiltersAsync(string ibgeCode, int startWeek, int endWeek, string arbovirus)
+    {
+        var reports = await _reportRepository.GetReportsByFiltersAsync(ibgeCode, startWeek, endWeek, arbovirus);
+        return reports.Select(r => r.MapToDTO());
     }
 }

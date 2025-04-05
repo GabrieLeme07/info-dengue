@@ -15,7 +15,7 @@ public static class DtoToEntityMapping
         };
     }
 
-    public static Report MapToEntity(this InfodengueRequestDto source, Guid userId)
+    public static Report MapToEntity(this InfodengueRequestDto source, Guid userId, int totalCases)
     {
         return new Report
         {
@@ -25,6 +25,7 @@ public static class DtoToEntityMapping
             EndWeek = source.EndWeek,
             IBGECode = source.IBGECode,
             City = source.City,
+            ReportedCases = totalCases,
             UserId = userId
         };
     }

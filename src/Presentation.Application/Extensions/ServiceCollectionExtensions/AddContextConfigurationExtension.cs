@@ -9,8 +9,7 @@ public static class AddContextConfigurationExtension
     {
         services.AddDbContext<AppDbContext>(options => 
             options.UseSqlServer(
-                 configuration.GetConnectionString("DefaultConnection"),
-                 b => b.MigrationsAssembly("FioTec.Infrastructure.Data")
+                 configuration.GetConnectionString("DefaultConnection")
              )
          );
 
